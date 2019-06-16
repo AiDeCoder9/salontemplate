@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+
+    <style>
+        .card-calendar{
+            border-radius: 0;
+            text-align: center;
+            background-color: #fafafa;
+            padding-top:.5rem;
+            cursor: pointer;
+        }
+
+        .card-date{
+            font-size: 1.6rem;
+        }
+
+        .card-calendar.active{
+            background:#ff5b61;
+            color: white;
+        }
+
+        #get_month{
+            text-align: center;
+            font-size: 2rem;
+        }
+
+    </style>
+  </head>
+  <body>
+
+    <div class="section py-5">
+            <div class="container">
+                    <div id="get_month"></div>    
+                <div class="row no-gutters" id="get_days">          
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+    </div>
+    
+
+    <div class="container">
+        <div class="row" id="get_dates">
+         
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="js/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+    <script>
+    var d= new moment();
+
+    var get_date = d.format('MMMM');
+    $('#get_month').text(get_date);
+        d=d.subtract(1,'d');
+    for(i=0;i<6;i++){
+
+        value ='';
+        date='';
+        day='';
+        carddesign='';
+        var f= d.add(1,'d');
+        var date=f.format('DD');
+        var day=f.format('MMM');
+        
+        var value = f.format('YYYY-MMM-Do');
+        
+        value =''+value;
+        
+        if(i==0){
+            var carddesign = 
+
+            `<div class="col-md-1">
+            <div class="card card-calendar calendarValue active">
+                    <input id="goal" type="hidden" value="`+value+`">
+                    <div class="card-day text-uppercase">`+day+`</div>
+                    <div class="card-date">`+date+`</div>
+                
+                </div>
+                </div>
+            `;
+
+            $('#get_days').append(carddesign);    
+        }
+
+        else{
+
+        var carddesign = 
+
+`<div class="col-md-1">
+<div class="card card-calendar calendarValue">
+        <input id="goal" type="hidden" value="`+value+`">
+        <div class="card-day text-uppercase">`+day+`</div>
+        <div class="card-date">`+date+`</div>
+    
+    </div>
+    </div>
+   `;
+
+$('#get_days').append(carddesign);
+        }
+
+
+        
+    }
+
+    $('.calendarValue').click(function(e){
+            var rock =$(this).children('input').val();
+            console.log(rock);
+        })
+    </script>
+  </body>
+</html>
